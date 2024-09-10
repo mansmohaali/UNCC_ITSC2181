@@ -1,0 +1,1329 @@
+===================================
+Sun Aug 25 12:33:01 EDT 2024
+===================================
+Sun Aug 25 12:38:26 EDT 2024
+
+      ,----..            ,----,          .---.
+     /   /   \         ,/   .`|         /. ./|
+    /   .     :      ,`   .'  :     .--'.  ' ;
+   .   /   ;.  \   ;    ;     /    /__./ \ : |
+  .   ;   /  ` ; .'___,/    ,' .--'.  '   \' .
+  ;   |  ; \ ; | |    :     | /___/ \ |    ' '
+  |   :  | ; | ' ;    |.';  ; ;   \  \;      :
+  .   |  ' ' ' : `----'  |  |  \   ;  `      |
+  '   ;  \; /  |     '   :  ;   .   \    .\  ;
+   \   \  ',  /      |   |  '    \   \   ' \ |
+    ;   :    /       '   :  |     :   '  |--"
+     \   \ .'        ;   |.'       \   \ ;
+  www. `---` ver     '---' he       '---" ire.org
+
+
+Welcome to OverTheWire!
+
+If you find any problems, please report them to the #wargames channel on
+discord or IRC.
+
+--[ Playing the games ]--
+
+  This machine might hold several wargames.
+  If you are playing "somegame", then:
+
+    * USERNAMES are somegame0, somegame1, ...
+    * Most LEVELS are stored in /somegame/.
+    * PASSWORDS for each level are stored in /etc/somegame_pass/.
+
+  Write-access to homedirectories is disabled. It is advised to create a
+  working directory with a hard-to-guess name in /tmp/.  You can use the
+  command "mktemp -d" in order to generate a random and hard to guess
+  directory in /tmp/.  Read-access to both /tmp/ is disabled and to /proc
+  restricted so that users cannot snoop on eachother. Files and directories
+  with easily guessable or short names will be periodically deleted! The /tmp
+  directory is regularly wiped.
+  Please play nice:
+
+    * don't leave orphan processes running
+    * don't leave exploit-files laying around
+    * don't annoy other players
+    * don't post passwords or spoilers
+    * again, DONT POST SPOILERS!
+      This includes writeups of your solution on your blog or website!
+
+--[ Tips ]--
+
+  This machine has a 64bit processor and many security-features enabled
+  by default, although ASLR has been switched off.  The following
+  compiler flags might be interesting:
+
+    -m32                    compile for 32bit
+    -fno-stack-protector    disable ProPolice
+    -Wl,-z,norelro          disable relro
+
+  In addition, the execstack tool can be used to flag the stack as
+  executable on ELF binaries.
+
+  Finally, network-access is limited for most levels by a local
+  firewall.
+
+--[ Tools ]--
+
+ For your convenience we have installed a few useful tools which you can find
+ in the following locations:
+
+    * gef (https://github.com/hugsy/gef) in /opt/gef/
+    * pwndbg (https://github.com/pwndbg/pwndbg) in /opt/pwndbg/
+    * peda (https://github.com/longld/peda.git) in /opt/peda/
+    * gdbinit (https://github.com/gdbinit/Gdbinit) in /opt/gdbinit/
+    * pwntools (https://github.com/Gallopsled/pwntools)
+    * radare2 (http://www.radare.org/)
+
+--[ More information ]--
+
+  For more information regarding individual wargames, visit
+  http://www.overthewire.org/wargames/
+
+  For support, questions or comments, contact us on discord or IRC.
+
+  Enjoy your stay!
+
+[?2004h]0;bandit0@bandit: ~[01;32mbandit0@bandit[00m:[01;34m~[00m$ exit
+[?2004llogout
+===================================
+Sun Aug 25 12:38:39 EDT 2024
+
+      ,----..            ,----,          .---.
+     /   /   \         ,/   .`|         /. ./|
+    /   .     :      ,`   .'  :     .--'.  ' ;
+   .   /   ;.  \   ;    ;     /    /__./ \ : |
+  .   ;   /  ` ; .'___,/    ,' .--'.  '   \' .
+  ;   |  ; \ ; | |    :     | /___/ \ |    ' '
+  |   :  | ; | ' ;    |.';  ; ;   \  \;      :
+  .   |  ' ' ' : `----'  |  |  \   ;  `      |
+  '   ;  \; /  |     '   :  ;   .   \    .\  ;
+   \   \  ',  /      |   |  '    \   \   ' \ |
+    ;   :    /       '   :  |     :   '  |--"
+     \   \ .'        ;   |.'       \   \ ;
+  www. `---` ver     '---' he       '---" ire.org
+
+
+Welcome to OverTheWire!
+
+If you find any problems, please report them to the #wargames channel on
+discord or IRC.
+
+--[ Playing the games ]--
+
+  This machine might hold several wargames.
+  If you are playing "somegame", then:
+
+    * USERNAMES are somegame0, somegame1, ...
+    * Most LEVELS are stored in /somegame/.
+    * PASSWORDS for each level are stored in /etc/somegame_pass/.
+
+  Write-access to homedirectories is disabled. It is advised to create a
+  working directory with a hard-to-guess name in /tmp/.  You can use the
+  command "mktemp -d" in order to generate a random and hard to guess
+  directory in /tmp/.  Read-access to both /tmp/ is disabled and to /proc
+  restricted so that users cannot snoop on eachother. Files and directories
+  with easily guessable or short names will be periodically deleted! The /tmp
+  directory is regularly wiped.
+  Please play nice:
+
+    * don't leave orphan processes running
+    * don't leave exploit-files laying around
+    * don't annoy other players
+    * don't post passwords or spoilers
+    * again, DONT POST SPOILERS!
+      This includes writeups of your solution on your blog or website!
+
+--[ Tips ]--
+
+  This machine has a 64bit processor and many security-features enabled
+  by default, although ASLR has been switched off.  The following
+  compiler flags might be interesting:
+
+    -m32                    compile for 32bit
+    -fno-stack-protector    disable ProPolice
+    -Wl,-z,norelro          disable relro
+
+  In addition, the execstack tool can be used to flag the stack as
+  executable on ELF binaries.
+
+  Finally, network-access is limited for most levels by a local
+  firewall.
+
+--[ Tools ]--
+
+ For your convenience we have installed a few useful tools which you can find
+ in the following locations:
+
+    * gef (https://github.com/hugsy/gef) in /opt/gef/
+    * pwndbg (https://github.com/pwndbg/pwndbg) in /opt/pwndbg/
+    * peda (https://github.com/longld/peda.git) in /opt/peda/
+    * gdbinit (https://github.com/gdbinit/Gdbinit) in /opt/gdbinit/
+    * pwntools (https://github.com/Gallopsled/pwntools)
+    * radare2 (http://www.radare.org/)
+
+--[ More information ]--
+
+  For more information regarding individual wargames, visit
+  http://www.overthewire.org/wargames/
+
+  For support, questions or comments, contact us on discord or IRC.
+
+  Enjoy your stay!
+
+[?2004h]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ ls
+[?2004l-
+[?2004h]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ cat [K[K[K[Kls [K[Ks -a
+[?2004l-  [0m[01;34m.[0m  [01;34m..[0m  .bash_logout  .bashrc  .profile
+[?2004h]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ ls -al
+[?2004ltotal 24
+-rw-r-----  1 bandit2 bandit1   33 Jul 17 15:57 -
+drwxr-xr-x  2 root    root    4096 Jul 17 15:57 [0m[01;34m.[0m
+drwxr-xr-x 70 root    root    4096 Jul 17 15:58 [01;34m..[0m
+-rw-r--r--  1 root    root     220 Mar 31 08:41 .bash_logout
+-rw-r--r--  1 root    root    3771 Mar 31 08:41 .bashrc
+-rw-r--r--  1 root    root     807 Mar 31 08:41 .profile
+[?2004h]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ cat -
+[?2004l
+
+
+
+^C
+[?2004h]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ cat -.-/-
+[?2004l263JGJPfgU6LtdEvgfWU1XP5yac29mFx
+[?2004h]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ cat "-'[K"
+[?2004l^C
+[?2004h]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ exit
+[?2004llogout
+===================================
+Sun Aug 25 12:40:26 EDT 2024
+
+      ,----..            ,----,          .---.
+     /   /   \         ,/   .`|         /. ./|
+    /   .     :      ,`   .'  :     .--'.  ' ;
+   .   /   ;.  \   ;    ;     /    /__./ \ : |
+  .   ;   /  ` ; .'___,/    ,' .--'.  '   \' .
+  ;   |  ; \ ; | |    :     | /___/ \ |    ' '
+  |   :  | ; | ' ;    |.';  ; ;   \  \;      :
+  .   |  ' ' ' : `----'  |  |  \   ;  `      |
+  '   ;  \; /  |     '   :  ;   .   \    .\  ;
+   \   \  ',  /      |   |  '    \   \   ' \ |
+    ;   :    /       '   :  |     :   '  |--"
+     \   \ .'        ;   |.'       \   \ ;
+  www. `---` ver     '---' he       '---" ire.org
+
+
+Welcome to OverTheWire!
+
+If you find any problems, please report them to the #wargames channel on
+discord or IRC.
+
+--[ Playing the games ]--
+
+  This machine might hold several wargames.
+  If you are playing "somegame", then:
+
+    * USERNAMES are somegame0, somegame1, ...
+    * Most LEVELS are stored in /somegame/.
+    * PASSWORDS for each level are stored in /etc/somegame_pass/.
+
+  Write-access to homedirectories is disabled. It is advised to create a
+  working directory with a hard-to-guess name in /tmp/.  You can use the
+  command "mktemp -d" in order to generate a random and hard to guess
+  directory in /tmp/.  Read-access to both /tmp/ is disabled and to /proc
+  restricted so that users cannot snoop on eachother. Files and directories
+  with easily guessable or short names will be periodically deleted! The /tmp
+  directory is regularly wiped.
+  Please play nice:
+
+    * don't leave orphan processes running
+    * don't leave exploit-files laying around
+    * don't annoy other players
+    * don't post passwords or spoilers
+    * again, DONT POST SPOILERS!
+      This includes writeups of your solution on your blog or website!
+
+--[ Tips ]--
+
+  This machine has a 64bit processor and many security-features enabled
+  by default, although ASLR has been switched off.  The following
+  compiler flags might be interesting:
+
+    -m32                    compile for 32bit
+    -fno-stack-protector    disable ProPolice
+    -Wl,-z,norelro          disable relro
+
+  In addition, the execstack tool can be used to flag the stack as
+  executable on ELF binaries.
+
+  Finally, network-access is limited for most levels by a local
+  firewall.
+
+--[ Tools ]--
+
+ For your convenience we have installed a few useful tools which you can find
+ in the following locations:
+
+    * gef (https://github.com/hugsy/gef) in /opt/gef/
+    * pwndbg (https://github.com/pwndbg/pwndbg) in /opt/pwndbg/
+    * peda (https://github.com/longld/peda.git) in /opt/peda/
+    * gdbinit (https://github.com/gdbinit/Gdbinit) in /opt/gdbinit/
+    * pwntools (https://github.com/Gallopsled/pwntools)
+    * radare2 (http://www.radare.org/)
+
+--[ More information ]--
+
+  For more information regarding individual wargames, visit
+  http://www.overthewire.org/wargames/
+
+  For support, questions or comments, contact us on discord or IRC.
+
+  Enjoy your stay!
+
+[?2004h]0;bandit2@bandit: ~[01;32mbandit2@bandit[00m:[01;34m~[00m$ ls
+[?2004lspaces in this filename
+[?2004h]0;bandit2@bandit: ~[01;32mbandit2@bandit[00m:[01;34m~[00m$ cat "spaces in this filename" 
+[?2004lMNk8KNH3Usiio41PRUEoDFPqfxLPlSmx
+[?2004h]0;bandit2@bandit: ~[01;32mbandit2@bandit[00m:[01;34m~[00m$ exit
+[?2004llogout
+===================================
+Sun Aug 25 12:41:45 EDT 2024
+
+      ,----..            ,----,          .---.
+     /   /   \         ,/   .`|         /. ./|
+    /   .     :      ,`   .'  :     .--'.  ' ;
+   .   /   ;.  \   ;    ;     /    /__./ \ : |
+  .   ;   /  ` ; .'___,/    ,' .--'.  '   \' .
+  ;   |  ; \ ; | |    :     | /___/ \ |    ' '
+  |   :  | ; | ' ;    |.';  ; ;   \  \;      :
+  .   |  ' ' ' : `----'  |  |  \   ;  `      |
+  '   ;  \; /  |     '   :  ;   .   \    .\  ;
+   \   \  ',  /      |   |  '    \   \   ' \ |
+    ;   :    /       '   :  |     :   '  |--"
+     \   \ .'        ;   |.'       \   \ ;
+  www. `---` ver     '---' he       '---" ire.org
+
+
+Welcome to OverTheWire!
+
+If you find any problems, please report them to the #wargames channel on
+discord or IRC.
+
+--[ Playing the games ]--
+
+  This machine might hold several wargames.
+  If you are playing "somegame", then:
+
+    * USERNAMES are somegame0, somegame1, ...
+    * Most LEVELS are stored in /somegame/.
+    * PASSWORDS for each level are stored in /etc/somegame_pass/.
+
+  Write-access to homedirectories is disabled. It is advised to create a
+  working directory with a hard-to-guess name in /tmp/.  You can use the
+  command "mktemp -d" in order to generate a random and hard to guess
+  directory in /tmp/.  Read-access to both /tmp/ is disabled and to /proc
+  restricted so that users cannot snoop on eachother. Files and directories
+  with easily guessable or short names will be periodically deleted! The /tmp
+  directory is regularly wiped.
+  Please play nice:
+
+    * don't leave orphan processes running
+    * don't leave exploit-files laying around
+    * don't annoy other players
+    * don't post passwords or spoilers
+    * again, DONT POST SPOILERS!
+      This includes writeups of your solution on your blog or website!
+
+--[ Tips ]--
+
+  This machine has a 64bit processor and many security-features enabled
+  by default, although ASLR has been switched off.  The following
+  compiler flags might be interesting:
+
+    -m32                    compile for 32bit
+    -fno-stack-protector    disable ProPolice
+    -Wl,-z,norelro          disable relro
+
+  In addition, the execstack tool can be used to flag the stack as
+  executable on ELF binaries.
+
+  Finally, network-access is limited for most levels by a local
+  firewall.
+
+--[ Tools ]--
+
+ For your convenience we have installed a few useful tools which you can find
+ in the following locations:
+
+    * gef (https://github.com/hugsy/gef) in /opt/gef/
+    * pwndbg (https://github.com/pwndbg/pwndbg) in /opt/pwndbg/
+    * peda (https://github.com/longld/peda.git) in /opt/peda/
+    * gdbinit (https://github.com/gdbinit/Gdbinit) in /opt/gdbinit/
+    * pwntools (https://github.com/Gallopsled/pwntools)
+    * radare2 (http://www.radare.org/)
+
+--[ More information ]--
+
+  For more information regarding individual wargames, visit
+  http://www.overthewire.org/wargames/
+
+  For support, questions or comments, contact us on discord or IRC.
+
+  Enjoy your stay!
+
+[?2004h]0;bandit3@bandit: ~[01;32mbandit3@bandit[00m:[01;34m~[00m$ ls
+[?2004l[0m[01;34minhere[0m
+[?2004h]0;bandit3@bandit: ~[01;32mbandit3@bandit[00m:[01;34m~[00m$ ls -l
+[?2004ltotal 4
+drwxr-xr-x 2 root root 4096 Jul 17 15:57 [0m[01;34minhere[0m
+[?2004h]0;bandit3@bandit: ~[01;32mbandit3@bandit[00m:[01;34m~[00m$ cd hi[K[K[Kin[K[K inhere/
+[?2004l[?2004h]0;bandit3@bandit: ~/inhere[01;32mbandit3@bandit[00m:[01;34m~/inhere[00m$ ls
+[?2004l[?2004h]0;bandit3@bandit: ~/inhere[01;32mbandit3@bandit[00m:[01;34m~/inhere[00m$ ls -l
+[?2004ltotal 0
+[?2004h]0;bandit3@bandit: ~/inhere[01;32mbandit3@bandit[00m:[01;34m~/inhere[00m$ ls -la
+[?2004ltotal 12
+drwxr-xr-x 2 root    root    4096 Jul 17 15:57 [0m[01;34m.[0m
+drwxr-xr-x 3 root    root    4096 Jul 17 15:57 [01;34m..[0m
+-rw-r----- 1 bandit4 bandit3   33 Jul 17 15:57 ...Hiding-From-You
+[?2004h]0;bandit3@bandit: ~/inhere[01;32mbandit3@bandit[00m:[01;34m~/inhere[00m$ cat ...Hiding-From-You 
+[?2004l2WmrDFRmJIq3IPxneAaMGhap0pFhF3NJ
+[?2004h]0;bandit3@bandit: ~/inhere[01;32mbandit3@bandit[00m:[01;34m~/inhere[00m$ exit
+[?2004llogout
+===================================
+Sun Aug 25 12:43:45 EDT 2024
+
+      ,----..            ,----,          .---.
+     /   /   \         ,/   .`|         /. ./|
+    /   .     :      ,`   .'  :     .--'.  ' ;
+   .   /   ;.  \   ;    ;     /    /__./ \ : |
+  .   ;   /  ` ; .'___,/    ,' .--'.  '   \' .
+  ;   |  ; \ ; | |    :     | /___/ \ |    ' '
+  |   :  | ; | ' ;    |.';  ; ;   \  \;      :
+  .   |  ' ' ' : `----'  |  |  \   ;  `      |
+  '   ;  \; /  |     '   :  ;   .   \    .\  ;
+   \   \  ',  /      |   |  '    \   \   ' \ |
+    ;   :    /       '   :  |     :   '  |--"
+     \   \ .'        ;   |.'       \   \ ;
+  www. `---` ver     '---' he       '---" ire.org
+
+
+Welcome to OverTheWire!
+
+If you find any problems, please report them to the #wargames channel on
+discord or IRC.
+
+--[ Playing the games ]--
+
+  This machine might hold several wargames.
+  If you are playing "somegame", then:
+
+    * USERNAMES are somegame0, somegame1, ...
+    * Most LEVELS are stored in /somegame/.
+    * PASSWORDS for each level are stored in /etc/somegame_pass/.
+
+  Write-access to homedirectories is disabled. It is advised to create a
+  working directory with a hard-to-guess name in /tmp/.  You can use the
+  command "mktemp -d" in order to generate a random and hard to guess
+  directory in /tmp/.  Read-access to both /tmp/ is disabled and to /proc
+  restricted so that users cannot snoop on eachother. Files and directories
+  with easily guessable or short names will be periodically deleted! The /tmp
+  directory is regularly wiped.
+  Please play nice:
+
+    * don't leave orphan processes running
+    * don't leave exploit-files laying around
+    * don't annoy other players
+    * don't post passwords or spoilers
+    * again, DONT POST SPOILERS!
+      This includes writeups of your solution on your blog or website!
+
+--[ Tips ]--
+
+  This machine has a 64bit processor and many security-features enabled
+  by default, although ASLR has been switched off.  The following
+  compiler flags might be interesting:
+
+    -m32                    compile for 32bit
+    -fno-stack-protector    disable ProPolice
+    -Wl,-z,norelro          disable relro
+
+  In addition, the execstack tool can be used to flag the stack as
+  executable on ELF binaries.
+
+  Finally, network-access is limited for most levels by a local
+  firewall.
+
+--[ Tools ]--
+
+ For your convenience we have installed a few useful tools which you can find
+ in the following locations:
+
+    * gef (https://github.com/hugsy/gef) in /opt/gef/
+    * pwndbg (https://github.com/pwndbg/pwndbg) in /opt/pwndbg/
+    * peda (https://github.com/longld/peda.git) in /opt/peda/
+    * gdbinit (https://github.com/gdbinit/Gdbinit) in /opt/gdbinit/
+    * pwntools (https://github.com/Gallopsled/pwntools)
+    * radare2 (http://www.radare.org/)
+
+--[ More information ]--
+
+  For more information regarding individual wargames, visit
+  http://www.overthewire.org/wargames/
+
+  For support, questions or comments, contact us on discord or IRC.
+
+  Enjoy your stay!
+
+[?2004h]0;bandit4@bandit: ~[01;32mbandit4@bandit[00m:[01;34m~[00m$ ls
+[?2004l[0m[01;34minhere[0m
+[?2004h]0;bandit4@bandit: ~[01;32mbandit4@bandit[00m:[01;34m~[00m$ cd inhere/
+[?2004l[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ ls
+[?2004l-file00  -file01  -file02  -file03  -file04  -file05  -file06  -file07  -file08  -file09
+[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ ls -l
+[?2004ltotal 40
+-rw-r----- 1 bandit5 bandit4 33 Jul 17 15:57 -file00
+-rw-r----- 1 bandit5 bandit4 33 Jul 17 15:57 -file01
+-rw-r----- 1 bandit5 bandit4 33 Jul 17 15:57 -file02
+-rw-r----- 1 bandit5 bandit4 33 Jul 17 15:57 -file03
+-rw-r----- 1 bandit5 bandit4 33 Jul 17 15:57 -file04
+-rw-r----- 1 bandit5 bandit4 33 Jul 17 15:57 -file05
+-rw-r----- 1 bandit5 bandit4 33 Jul 17 15:57 -file06
+-rw-r----- 1 bandit5 bandit4 33 Jul 17 15:57 -file07
+-rw-r----- 1 bandit5 bandit4 33 Jul 17 15:57 -file08
+-rw-r----- 1 bandit5 bandit4 33 Jul 17 15:57 -file09
+[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ cat .[K./-file00
+[?2004lÅ¢,µªÅ†ÖπYq»Ìf†LÚˆÕjÃ0µÛñÃıxã4F[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ cat ./-file00[C[K1
+[?2004lâ¶:≥>†3kÍvè5K´˚ípÕìŒ	XN‘.ãìù[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ cat ./-file01[K3[K2
+[?2004l£ê9Ü¯íô√Ó§F«˜p‰ÙÆˇ∏Ê„tkºÇó%˙¿[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ cat ./-file02[K3
+[?2004lê≠üÜ˝nÜQy‘‰åyÕç¶{+R€bZ¶k™FÅ*	[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ cat ./-file03[K4
+[?2004l
+l∫ÏˇÅê]…aﬂØ-@gQø√∑ºwzêP·∫ﬂ†yß[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ cat ./-file04[K5
+[?2004l p”ªT9÷FÛô∑Âû3À§ùﬁÔõ”)
+T˘’úF‡«≠â[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ cat ./-file05[K6
+[?2004lQ ƒπâMª∞◊p4ó-Ô8™‡=¯é!#gèóÓ£[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ cat ./-file06[K7
+[?2004l4oQYVPkxZOOEOO5pTW81FB8j8lxXGUQw
+[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ cat ./-file07[K8
+[?2004l ßh?+>©¥ÒÉR0\üÖqÉc˙µ(|è^âÓ±[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ cat ./-file08[K9
+[?2004lJÁÅ$}PÏcL‡û¸sóÌ@∑2%Y£—ã≠œ¢µ√[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ file ./-file0
+[?2004l./-file0: cannot open `./-file0' (No such file or directory)
+[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ file ./-file00 
+[?2004l./-file00: data
+[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ file ./-file00 [K[K1
+[?2004l./-file01: data
+[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ file ./-file01[K[K02
+[?2004l./-file02: data
+[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ file ./-file02[K3
+[?2004l./-file03: data
+[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ file ./-file034[K[K4
+[?2004l./-file04: data
+[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ file ./-file04[K5
+[?2004l./-file05: data
+[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ file ./-file05[K*
+[?2004l./-file00: data
+./-file01: data
+./-file02: data
+./-file03: data
+./-file04: data
+./-file05: data
+./-file06: data
+./-file07: ASCII text
+./-file08: data
+./-file09: data
+[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ cat /[K~/[K[K./fi[K[Kf[K-file07 
+[?2004l4oQYVPkxZOOEOO5pTW81FB8j8lxXGUQw
+[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ exit
+[?2004llogout
+===================================
+Sun Aug 25 12:47:04 EDT 2024
+
+      ,----..            ,----,          .---.
+     /   /   \         ,/   .`|         /. ./|
+    /   .     :      ,`   .'  :     .--'.  ' ;
+   .   /   ;.  \   ;    ;     /    /__./ \ : |
+  .   ;   /  ` ; .'___,/    ,' .--'.  '   \' .
+  ;   |  ; \ ; | |    :     | /___/ \ |    ' '
+  |   :  | ; | ' ;    |.';  ; ;   \  \;      :
+  .   |  ' ' ' : `----'  |  |  \   ;  `      |
+  '   ;  \; /  |     '   :  ;   .   \    .\  ;
+   \   \  ',  /      |   |  '    \   \   ' \ |
+    ;   :    /       '   :  |     :   '  |--"
+     \   \ .'        ;   |.'       \   \ ;
+  www. `---` ver     '---' he       '---" ire.org
+
+
+Welcome to OverTheWire!
+
+If you find any problems, please report them to the #wargames channel on
+discord or IRC.
+
+--[ Playing the games ]--
+
+  This machine might hold several wargames.
+  If you are playing "somegame", then:
+
+    * USERNAMES are somegame0, somegame1, ...
+    * Most LEVELS are stored in /somegame/.
+    * PASSWORDS for each level are stored in /etc/somegame_pass/.
+
+  Write-access to homedirectories is disabled. It is advised to create a
+  working directory with a hard-to-guess name in /tmp/.  You can use the
+  command "mktemp -d" in order to generate a random and hard to guess
+  directory in /tmp/.  Read-access to both /tmp/ is disabled and to /proc
+  restricted so that users cannot snoop on eachother. Files and directories
+  with easily guessable or short names will be periodically deleted! The /tmp
+  directory is regularly wiped.
+  Please play nice:
+
+    * don't leave orphan processes running
+    * don't leave exploit-files laying around
+    * don't annoy other players
+    * don't post passwords or spoilers
+    * again, DONT POST SPOILERS!
+      This includes writeups of your solution on your blog or website!
+
+--[ Tips ]--
+
+  This machine has a 64bit processor and many security-features enabled
+  by default, although ASLR has been switched off.  The following
+  compiler flags might be interesting:
+
+    -m32                    compile for 32bit
+    -fno-stack-protector    disable ProPolice
+    -Wl,-z,norelro          disable relro
+
+  In addition, the execstack tool can be used to flag the stack as
+  executable on ELF binaries.
+
+  Finally, network-access is limited for most levels by a local
+  firewall.
+
+--[ Tools ]--
+
+ For your convenience we have installed a few useful tools which you can find
+ in the following locations:
+
+    * gef (https://github.com/hugsy/gef) in /opt/gef/
+    * pwndbg (https://github.com/pwndbg/pwndbg) in /opt/pwndbg/
+    * peda (https://github.com/longld/peda.git) in /opt/peda/
+    * gdbinit (https://github.com/gdbinit/Gdbinit) in /opt/gdbinit/
+    * pwntools (https://github.com/Gallopsled/pwntools)
+    * radare2 (http://www.radare.org/)
+
+--[ More information ]--
+
+  For more information regarding individual wargames, visit
+  http://www.overthewire.org/wargames/
+
+  For support, questions or comments, contact us on discord or IRC.
+
+  Enjoy your stay!
+
+[?2004h]0;bandit5@bandit: ~[01;32mbandit5@bandit[00m:[01;34m~[00m$ exit
+[?2004llogout
+===================================
+Tue Sep 10 17:21:43 EDT 2024
+
+      ,----..            ,----,          .---.
+     /   /   \         ,/   .`|         /. ./|
+    /   .     :      ,`   .'  :     .--'.  ' ;
+   .   /   ;.  \   ;    ;     /    /__./ \ : |
+  .   ;   /  ` ; .'___,/    ,' .--'.  '   \' .
+  ;   |  ; \ ; | |    :     | /___/ \ |    ' '
+  |   :  | ; | ' ;    |.';  ; ;   \  \;      :
+  .   |  ' ' ' : `----'  |  |  \   ;  `      |
+  '   ;  \; /  |     '   :  ;   .   \    .\  ;
+   \   \  ',  /      |   |  '    \   \   ' \ |
+    ;   :    /       '   :  |     :   '  |--"
+     \   \ .'        ;   |.'       \   \ ;
+  www. `---` ver     '---' he       '---" ire.org
+
+
+Welcome to OverTheWire!
+
+If you find any problems, please report them to the #wargames channel on
+discord or IRC.
+
+--[ Playing the games ]--
+
+  This machine might hold several wargames.
+  If you are playing "somegame", then:
+
+    * USERNAMES are somegame0, somegame1, ...
+    * Most LEVELS are stored in /somegame/.
+    * PASSWORDS for each level are stored in /etc/somegame_pass/.
+
+  Write-access to homedirectories is disabled. It is advised to create a
+  working directory with a hard-to-guess name in /tmp/.  You can use the
+  command "mktemp -d" in order to generate a random and hard to guess
+  directory in /tmp/.  Read-access to both /tmp/ is disabled and to /proc
+  restricted so that users cannot snoop on eachother. Files and directories
+  with easily guessable or short names will be periodically deleted! The /tmp
+  directory is regularly wiped.
+  Please play nice:
+
+    * don't leave orphan processes running
+    * don't leave exploit-files laying around
+    * don't annoy other players
+    * don't post passwords or spoilers
+    * again, DONT POST SPOILERS!
+      This includes writeups of your solution on your blog or website!
+
+--[ Tips ]--
+
+  This machine has a 64bit processor and many security-features enabled
+  by default, although ASLR has been switched off.  The following
+  compiler flags might be interesting:
+
+    -m32                    compile for 32bit
+    -fno-stack-protector    disable ProPolice
+    -Wl,-z,norelro          disable relro
+
+  In addition, the execstack tool can be used to flag the stack as
+  executable on ELF binaries.
+
+  Finally, network-access is limited for most levels by a local
+  firewall.
+
+--[ Tools ]--
+
+ For your convenience we have installed a few useful tools which you can find
+ in the following locations:
+
+    * gef (https://github.com/hugsy/gef) in /opt/gef/
+    * pwndbg (https://github.com/pwndbg/pwndbg) in /opt/pwndbg/
+    * peda (https://github.com/longld/peda.git) in /opt/peda/
+    * gdbinit (https://github.com/gdbinit/Gdbinit) in /opt/gdbinit/
+    * pwntools (https://github.com/Gallopsled/pwntools)
+    * radare2 (http://www.radare.org/)
+
+--[ More information ]--
+
+  For more information regarding individual wargames, visit
+  http://www.overthewire.org/wargames/
+
+  For support, questions or comments, contact us on discord or IRC.
+
+  Enjoy your stay!
+
+[?2004h]0;bandit0@bandit: ~[01;32mbandit0@bandit[00m:[01;34m~[00m$ ls
+[?2004lreadme
+[?2004h]0;bandit0@bandit: ~[01;32mbandit0@bandit[00m:[01;34m~[00m$ ba[Kc[K[Kcat readme 
+[?2004lCongratulations on your first steps into the bandit game!!
+Please make sure you have read the rules at https://overthewire.org/rules/
+If you are following a course, workshop, walthrough or other educational activity,
+please inform the instructor about the rules as well and encourage them to
+contribute to the OverTheWire community so we can keep these games free!
+
+The password you are looking for is: ZjLjTmM6FvvyRnrb2rfNWOZOTa6ip5If
+
+[?2004h]0;bandit0@bandit: ~[01;32mbandit0@bandit[00m:[01;34m~[00m$ exit
+[?2004llogout
+===================================
+Tue Sep 10 17:24:25 EDT 2024
+
+      ,----..            ,----,          .---.
+     /   /   \         ,/   .`|         /. ./|
+    /   .     :      ,`   .'  :     .--'.  ' ;
+   .   /   ;.  \   ;    ;     /    /__./ \ : |
+  .   ;   /  ` ; .'___,/    ,' .--'.  '   \' .
+  ;   |  ; \ ; | |    :     | /___/ \ |    ' '
+  |   :  | ; | ' ;    |.';  ; ;   \  \;      :
+  .   |  ' ' ' : `----'  |  |  \   ;  `      |
+  '   ;  \; /  |     '   :  ;   .   \    .\  ;
+   \   \  ',  /      |   |  '    \   \   ' \ |
+    ;   :    /       '   :  |     :   '  |--"
+     \   \ .'        ;   |.'       \   \ ;
+  www. `---` ver     '---' he       '---" ire.org
+
+
+Welcome to OverTheWire!
+
+If you find any problems, please report them to the #wargames channel on
+discord or IRC.
+
+--[ Playing the games ]--
+
+  This machine might hold several wargames.
+  If you are playing "somegame", then:
+
+    * USERNAMES are somegame0, somegame1, ...
+    * Most LEVELS are stored in /somegame/.
+    * PASSWORDS for each level are stored in /etc/somegame_pass/.
+
+  Write-access to homedirectories is disabled. It is advised to create a
+  working directory with a hard-to-guess name in /tmp/.  You can use the
+  command "mktemp -d" in order to generate a random and hard to guess
+  directory in /tmp/.  Read-access to both /tmp/ is disabled and to /proc
+  restricted so that users cannot snoop on eachother. Files and directories
+  with easily guessable or short names will be periodically deleted! The /tmp
+  directory is regularly wiped.
+  Please play nice:
+
+    * don't leave orphan processes running
+    * don't leave exploit-files laying around
+    * don't annoy other players
+    * don't post passwords or spoilers
+    * again, DONT POST SPOILERS!
+      This includes writeups of your solution on your blog or website!
+
+--[ Tips ]--
+
+  This machine has a 64bit processor and many security-features enabled
+  by default, although ASLR has been switched off.  The following
+  compiler flags might be interesting:
+
+    -m32                    compile for 32bit
+    -fno-stack-protector    disable ProPolice
+    -Wl,-z,norelro          disable relro
+
+  In addition, the execstack tool can be used to flag the stack as
+  executable on ELF binaries.
+
+  Finally, network-access is limited for most levels by a local
+  firewall.
+
+--[ Tools ]--
+
+ For your convenience we have installed a few useful tools which you can find
+ in the following locations:
+
+    * gef (https://github.com/hugsy/gef) in /opt/gef/
+    * pwndbg (https://github.com/pwndbg/pwndbg) in /opt/pwndbg/
+    * peda (https://github.com/longld/peda.git) in /opt/peda/
+    * gdbinit (https://github.com/gdbinit/Gdbinit) in /opt/gdbinit/
+    * pwntools (https://github.com/Gallopsled/pwntools)
+    * radare2 (http://www.radare.org/)
+
+--[ More information ]--
+
+  For more information regarding individual wargames, visit
+  http://www.overthewire.org/wargames/
+
+  For support, questions or comments, contact us on discord or IRC.
+
+  Enjoy your stay!
+
+[?2004h]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ ls
+[?2004l-
+[?2004h]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ at[K[Kcat -
+[?2004l^C
+[?2004h]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ ls 
+[?2004l-
+[?2004h]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ ls -la
+[?2004ltotal 24
+-rw-r-----  1 bandit2 bandit1   33 Jul 17 15:57 -
+drwxr-xr-x  2 root    root    4096 Jul 17 15:57 [0m[01;34m.[0m
+drwxr-xr-x 70 root    root    4096 Jul 17 15:58 [01;34m..[0m
+-rw-r--r--  1 root    root     220 Mar 31 08:41 .bash_logout
+-rw-r--r--  1 root    root    3771 Mar 31 08:41 .bashrc
+-rw-r--r--  1 root    root     807 Mar 31 08:41 .profile
+[?2004h]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ ch[K[Kcat 
+-             .bash_logout  .bashrc       .profile      
+]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ cat 
+-             .bash_logout  .bashrc       .profile      
+]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ cat --[K[K-
+[?2004lls -la
+ls -la
+^C
+[?2004h]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ cat ./-
+[?2004l263JGJPfgU6LtdEvgfWU1XP5yac29mFx
+[?2004h]0;bandit1@bandit: ~[01;32mbandit1@bandit[00m:[01;34m~[00m$ exit
+[?2004llogout
+===================================
+Tue Sep 10 17:27:21 EDT 2024
+
+      ,----..            ,----,          .---.
+     /   /   \         ,/   .`|         /. ./|
+    /   .     :      ,`   .'  :     .--'.  ' ;
+   .   /   ;.  \   ;    ;     /    /__./ \ : |
+  .   ;   /  ` ; .'___,/    ,' .--'.  '   \' .
+  ;   |  ; \ ; | |    :     | /___/ \ |    ' '
+  |   :  | ; | ' ;    |.';  ; ;   \  \;      :
+  .   |  ' ' ' : `----'  |  |  \   ;  `      |
+  '   ;  \; /  |     '   :  ;   .   \    .\  ;
+   \   \  ',  /      |   |  '    \   \   ' \ |
+    ;   :    /       '   :  |     :   '  |--"
+     \   \ .'        ;   |.'       \   \ ;
+  www. `---` ver     '---' he       '---" ire.org
+
+
+Welcome to OverTheWire!
+
+If you find any problems, please report them to the #wargames channel on
+discord or IRC.
+
+--[ Playing the games ]--
+
+  This machine might hold several wargames.
+  If you are playing "somegame", then:
+
+    * USERNAMES are somegame0, somegame1, ...
+    * Most LEVELS are stored in /somegame/.
+    * PASSWORDS for each level are stored in /etc/somegame_pass/.
+
+  Write-access to homedirectories is disabled. It is advised to create a
+  working directory with a hard-to-guess name in /tmp/.  You can use the
+  command "mktemp -d" in order to generate a random and hard to guess
+  directory in /tmp/.  Read-access to both /tmp/ is disabled and to /proc
+  restricted so that users cannot snoop on eachother. Files and directories
+  with easily guessable or short names will be periodically deleted! The /tmp
+  directory is regularly wiped.
+  Please play nice:
+
+    * don't leave orphan processes running
+    * don't leave exploit-files laying around
+    * don't annoy other players
+    * don't post passwords or spoilers
+    * again, DONT POST SPOILERS!
+      This includes writeups of your solution on your blog or website!
+
+--[ Tips ]--
+
+  This machine has a 64bit processor and many security-features enabled
+  by default, although ASLR has been switched off.  The following
+  compiler flags might be interesting:
+
+    -m32                    compile for 32bit
+    -fno-stack-protector    disable ProPolice
+    -Wl,-z,norelro          disable relro
+
+  In addition, the execstack tool can be used to flag the stack as
+  executable on ELF binaries.
+
+  Finally, network-access is limited for most levels by a local
+  firewall.
+
+--[ Tools ]--
+
+ For your convenience we have installed a few useful tools which you can find
+ in the following locations:
+
+    * gef (https://github.com/hugsy/gef) in /opt/gef/
+    * pwndbg (https://github.com/pwndbg/pwndbg) in /opt/pwndbg/
+    * peda (https://github.com/longld/peda.git) in /opt/peda/
+    * gdbinit (https://github.com/gdbinit/Gdbinit) in /opt/gdbinit/
+    * pwntools (https://github.com/Gallopsled/pwntools)
+    * radare2 (http://www.radare.org/)
+
+--[ More information ]--
+
+  For more information regarding individual wargames, visit
+  http://www.overthewire.org/wargames/
+
+  For support, questions or comments, contact us on discord or IRC.
+
+  Enjoy your stay!
+
+[?2004h]0;bandit2@bandit: ~[01;32mbandit2@bandit[00m:[01;34m~[00m$ ls
+[?2004lspaces in this filename
+[?2004h]0;bandit2@bandit: ~[01;32mbandit2@bandit[00m:[01;34m~[00m$ cat ""a"[1P"s"p"a"ces in this filename" 
+[?2004lMNk8KNH3Usiio41PRUEoDFPqfxLPlSmx
+[?2004h]0;bandit2@bandit: ~[01;32mbandit2@bandit[00m:[01;34m~[00m$ exit
+[?2004llogout
+===================================
+Tue Sep 10 17:28:19 EDT 2024
+
+      ,----..            ,----,          .---.
+     /   /   \         ,/   .`|         /. ./|
+    /   .     :      ,`   .'  :     .--'.  ' ;
+   .   /   ;.  \   ;    ;     /    /__./ \ : |
+  .   ;   /  ` ; .'___,/    ,' .--'.  '   \' .
+  ;   |  ; \ ; | |    :     | /___/ \ |    ' '
+  |   :  | ; | ' ;    |.';  ; ;   \  \;      :
+  .   |  ' ' ' : `----'  |  |  \   ;  `      |
+  '   ;  \; /  |     '   :  ;   .   \    .\  ;
+   \   \  ',  /      |   |  '    \   \   ' \ |
+    ;   :    /       '   :  |     :   '  |--"
+     \   \ .'        ;   |.'       \   \ ;
+  www. `---` ver     '---' he       '---" ire.org
+
+
+Welcome to OverTheWire!
+
+If you find any problems, please report them to the #wargames channel on
+discord or IRC.
+
+--[ Playing the games ]--
+
+  This machine might hold several wargames.
+  If you are playing "somegame", then:
+
+    * USERNAMES are somegame0, somegame1, ...
+    * Most LEVELS are stored in /somegame/.
+    * PASSWORDS for each level are stored in /etc/somegame_pass/.
+
+  Write-access to homedirectories is disabled. It is advised to create a
+  working directory with a hard-to-guess name in /tmp/.  You can use the
+  command "mktemp -d" in order to generate a random and hard to guess
+  directory in /tmp/.  Read-access to both /tmp/ is disabled and to /proc
+  restricted so that users cannot snoop on eachother. Files and directories
+  with easily guessable or short names will be periodically deleted! The /tmp
+  directory is regularly wiped.
+  Please play nice:
+
+    * don't leave orphan processes running
+    * don't leave exploit-files laying around
+    * don't annoy other players
+    * don't post passwords or spoilers
+    * again, DONT POST SPOILERS!
+      This includes writeups of your solution on your blog or website!
+
+--[ Tips ]--
+
+  This machine has a 64bit processor and many security-features enabled
+  by default, although ASLR has been switched off.  The following
+  compiler flags might be interesting:
+
+    -m32                    compile for 32bit
+    -fno-stack-protector    disable ProPolice
+    -Wl,-z,norelro          disable relro
+
+  In addition, the execstack tool can be used to flag the stack as
+  executable on ELF binaries.
+
+  Finally, network-access is limited for most levels by a local
+  firewall.
+
+--[ Tools ]--
+
+ For your convenience we have installed a few useful tools which you can find
+ in the following locations:
+
+    * gef (https://github.com/hugsy/gef) in /opt/gef/
+    * pwndbg (https://github.com/pwndbg/pwndbg) in /opt/pwndbg/
+    * peda (https://github.com/longld/peda.git) in /opt/peda/
+    * gdbinit (https://github.com/gdbinit/Gdbinit) in /opt/gdbinit/
+    * pwntools (https://github.com/Gallopsled/pwntools)
+    * radare2 (http://www.radare.org/)
+
+--[ More information ]--
+
+  For more information regarding individual wargames, visit
+  http://www.overthewire.org/wargames/
+
+  For support, questions or comments, contact us on discord or IRC.
+
+  Enjoy your stay!
+
+[?2004h]0;bandit3@bandit: ~[01;32mbandit3@bandit[00m:[01;34m~[00m$ ls
+[?2004l[0m[01;34minhere[0m
+[?2004h]0;bandit3@bandit: ~[01;32mbandit3@bandit[00m:[01;34m~[00m$ ls -la
+[?2004ltotal 24
+drwxr-xr-x  3 root root 4096 Jul 17 15:57 [0m[01;34m.[0m
+drwxr-xr-x 70 root root 4096 Jul 17 15:58 [01;34m..[0m
+-rw-r--r--  1 root root  220 Mar 31 08:41 .bash_logout
+-rw-r--r--  1 root root 3771 Mar 31 08:41 .bashrc
+drwxr-xr-x  2 root root 4096 Jul 17 15:57 [01;34minhere[0m
+-rw-r--r--  1 root root  807 Mar 31 08:41 .profile
+[?2004h]0;bandit3@bandit: ~[01;32mbandit3@bandit[00m:[01;34m~[00m$ cat inhere/
+[?2004lcat: inhere/: Is a directory
+[?2004h]0;bandit3@bandit: ~[01;32mbandit3@bandit[00m:[01;34m~[00m$ cd inhere/
+[?2004l[?2004h]0;bandit3@bandit: ~/inhere[01;32mbandit3@bandit[00m:[01;34m~/inhere[00m$ cat ...Hiding-From-You 
+[?2004l2WmrDFRmJIq3IPxneAaMGhap0pFhF3NJ
+[?2004h]0;bandit3@bandit: ~/inhere[01;32mbandit3@bandit[00m:[01;34m~/inhere[00m$ exit
+[?2004llogout
+===================================
+Tue Sep 10 17:29:15 EDT 2024
+
+      ,----..            ,----,          .---.
+     /   /   \         ,/   .`|         /. ./|
+    /   .     :      ,`   .'  :     .--'.  ' ;
+   .   /   ;.  \   ;    ;     /    /__./ \ : |
+  .   ;   /  ` ; .'___,/    ,' .--'.  '   \' .
+  ;   |  ; \ ; | |    :     | /___/ \ |    ' '
+  |   :  | ; | ' ;    |.';  ; ;   \  \;      :
+  .   |  ' ' ' : `----'  |  |  \   ;  `      |
+  '   ;  \; /  |     '   :  ;   .   \    .\  ;
+   \   \  ',  /      |   |  '    \   \   ' \ |
+    ;   :    /       '   :  |     :   '  |--"
+     \   \ .'        ;   |.'       \   \ ;
+  www. `---` ver     '---' he       '---" ire.org
+
+
+Welcome to OverTheWire!
+
+If you find any problems, please report them to the #wargames channel on
+discord or IRC.
+
+--[ Playing the games ]--
+
+  This machine might hold several wargames.
+  If you are playing "somegame", then:
+
+    * USERNAMES are somegame0, somegame1, ...
+    * Most LEVELS are stored in /somegame/.
+    * PASSWORDS for each level are stored in /etc/somegame_pass/.
+
+  Write-access to homedirectories is disabled. It is advised to create a
+  working directory with a hard-to-guess name in /tmp/.  You can use the
+  command "mktemp -d" in order to generate a random and hard to guess
+  directory in /tmp/.  Read-access to both /tmp/ is disabled and to /proc
+  restricted so that users cannot snoop on eachother. Files and directories
+  with easily guessable or short names will be periodically deleted! The /tmp
+  directory is regularly wiped.
+  Please play nice:
+
+    * don't leave orphan processes running
+    * don't leave exploit-files laying around
+    * don't annoy other players
+    * don't post passwords or spoilers
+    * again, DONT POST SPOILERS!
+      This includes writeups of your solution on your blog or website!
+
+--[ Tips ]--
+
+  This machine has a 64bit processor and many security-features enabled
+  by default, although ASLR has been switched off.  The following
+  compiler flags might be interesting:
+
+    -m32                    compile for 32bit
+    -fno-stack-protector    disable ProPolice
+    -Wl,-z,norelro          disable relro
+
+  In addition, the execstack tool can be used to flag the stack as
+  executable on ELF binaries.
+
+  Finally, network-access is limited for most levels by a local
+  firewall.
+
+--[ Tools ]--
+
+ For your convenience we have installed a few useful tools which you can find
+ in the following locations:
+
+    * gef (https://github.com/hugsy/gef) in /opt/gef/
+    * pwndbg (https://github.com/pwndbg/pwndbg) in /opt/pwndbg/
+    * peda (https://github.com/longld/peda.git) in /opt/peda/
+    * gdbinit (https://github.com/gdbinit/Gdbinit) in /opt/gdbinit/
+    * pwntools (https://github.com/Gallopsled/pwntools)
+    * radare2 (http://www.radare.org/)
+
+--[ More information ]--
+
+  For more information regarding individual wargames, visit
+  http://www.overthewire.org/wargames/
+
+  For support, questions or comments, contact us on discord or IRC.
+
+  Enjoy your stay!
+
+[?2004h]0;bandit4@bandit: ~[01;32mbandit4@bandit[00m:[01;34m~[00m$ exit ; ./clh 4
+[?2004llogout
+===================================
+Tue Sep 10 17:30:03 EDT 2024
+===================================
+Tue Sep 10 17:30:17 EDT 2024
+
+      ,----..            ,----,          .---.
+     /   /   \         ,/   .`|         /. ./|
+    /   .     :      ,`   .'  :     .--'.  ' ;
+   .   /   ;.  \   ;    ;     /    /__./ \ : |
+  .   ;   /  ` ; .'___,/    ,' .--'.  '   \' .
+  ;   |  ; \ ; | |    :     | /___/ \ |    ' '
+  |   :  | ; | ' ;    |.';  ; ;   \  \;      :
+  .   |  ' ' ' : `----'  |  |  \   ;  `      |
+  '   ;  \; /  |     '   :  ;   .   \    .\  ;
+   \   \  ',  /      |   |  '    \   \   ' \ |
+    ;   :    /       '   :  |     :   '  |--"
+     \   \ .'        ;   |.'       \   \ ;
+  www. `---` ver     '---' he       '---" ire.org
+
+
+Welcome to OverTheWire!
+
+If you find any problems, please report them to the #wargames channel on
+discord or IRC.
+
+--[ Playing the games ]--
+
+  This machine might hold several wargames.
+  If you are playing "somegame", then:
+
+    * USERNAMES are somegame0, somegame1, ...
+    * Most LEVELS are stored in /somegame/.
+    * PASSWORDS for each level are stored in /etc/somegame_pass/.
+
+  Write-access to homedirectories is disabled. It is advised to create a
+  working directory with a hard-to-guess name in /tmp/.  You can use the
+  command "mktemp -d" in order to generate a random and hard to guess
+  directory in /tmp/.  Read-access to both /tmp/ is disabled and to /proc
+  restricted so that users cannot snoop on eachother. Files and directories
+  with easily guessable or short names will be periodically deleted! The /tmp
+  directory is regularly wiped.
+  Please play nice:
+
+    * don't leave orphan processes running
+    * don't leave exploit-files laying around
+    * don't annoy other players
+    * don't post passwords or spoilers
+    * again, DONT POST SPOILERS!
+      This includes writeups of your solution on your blog or website!
+
+--[ Tips ]--
+
+  This machine has a 64bit processor and many security-features enabled
+  by default, although ASLR has been switched off.  The following
+  compiler flags might be interesting:
+
+    -m32                    compile for 32bit
+    -fno-stack-protector    disable ProPolice
+    -Wl,-z,norelro          disable relro
+
+  In addition, the execstack tool can be used to flag the stack as
+  executable on ELF binaries.
+
+  Finally, network-access is limited for most levels by a local
+  firewall.
+
+--[ Tools ]--
+
+ For your convenience we have installed a few useful tools which you can find
+ in the following locations:
+
+    * gef (https://github.com/hugsy/gef) in /opt/gef/
+    * pwndbg (https://github.com/pwndbg/pwndbg) in /opt/pwndbg/
+    * peda (https://github.com/longld/peda.git) in /opt/peda/
+    * gdbinit (https://github.com/gdbinit/Gdbinit) in /opt/gdbinit/
+    * pwntools (https://github.com/Gallopsled/pwntools)
+    * radare2 (http://www.radare.org/)
+
+--[ More information ]--
+
+  For more information regarding individual wargames, visit
+  http://www.overthewire.org/wargames/
+
+  For support, questions or comments, contact us on discord or IRC.
+
+  Enjoy your stay!
+
+[?2004h]0;bandit4@bandit: ~[01;32mbandit4@bandit[00m:[01;34m~[00m$ ls
+[?2004l[0m[01;34minhere[0m
+[?2004h]0;bandit4@bandit: ~[01;32mbandit4@bandit[00m:[01;34m~[00m$ ls
+[?2004l[0m[01;34minhere[0m
+[?2004h]0;bandit4@bandit: ~[01;32mbandit4@bandit[00m:[01;34m~[00m$ ls -la
+[?2004ltotal 24
+drwxr-xr-x  3 root root 4096 Jul 17 15:57 [0m[01;34m.[0m
+drwxr-xr-x 70 root root 4096 Jul 17 15:58 [01;34m..[0m
+-rw-r--r--  1 root root  220 Mar 31 08:41 .bash_logout
+-rw-r--r--  1 root root 3771 Mar 31 08:41 .bashrc
+drwxr-xr-x  2 root root 4096 Jul 17 15:57 [01;34minhere[0m
+-rw-r--r--  1 root root  807 Mar 31 08:41 .profile
+[?2004h]0;bandit4@bandit: ~[01;32mbandit4@bandit[00m:[01;34m~[00m$ cd inhere/
+[?2004l[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ ls -la
+[?2004ltotal 48
+drwxr-xr-x 2 root    root    4096 Jul 17 15:57 [0m[01;34m.[0m
+drwxr-xr-x 3 root    root    4096 Jul 17 15:57 [01;34m..[0m
+-rw-r----- 1 bandit5 bandit4   33 Jul 17 15:57 -file00
+-rw-r----- 1 bandit5 bandit4   33 Jul 17 15:57 -file01
+-rw-r----- 1 bandit5 bandit4   33 Jul 17 15:57 -file02
+-rw-r----- 1 bandit5 bandit4   33 Jul 17 15:57 -file03
+-rw-r----- 1 bandit5 bandit4   33 Jul 17 15:57 -file04
+-rw-r----- 1 bandit5 bandit4   33 Jul 17 15:57 -file05
+-rw-r----- 1 bandit5 bandit4   33 Jul 17 15:57 -file06
+-rw-r----- 1 bandit5 bandit4   33 Jul 17 15:57 -file07
+-rw-r----- 1 bandit5 bandit4   33 Jul 17 15:57 -file08
+-rw-r----- 1 bandit5 bandit4   33 Jul 17 15:57 -file09
+[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ cat .//[K-file00
+[?2004lÅ¢,µªÅ†ÖπYq»Ìf†LÚˆÕjÃ0µÛñÃıxã4F[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ cat ./-file00[K1
+[?2004lâ¶:≥>†3kÍvè5K´˚ípÕìŒ	XN‘.ãìù[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ cat ./-file01[K2
+[?2004l£ê9Ü¯íô√Ó§F«˜p‰ÙÆˇ∏Ê„tkºÇó%˙¿[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ cat ./-file02[K3
+[?2004lê≠üÜ˝nÜQy‘‰åyÕç¶{+R€bZ¶k™FÅ*	[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ cat ./-file03[K4
+[?2004l
+l∫ÏˇÅê]…aﬂØ-@gQø√∑ºwzêP·∫ﬂ†yß[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ cat ./-file04[K5
+[?2004l p”ªT9÷FÛô∑Âû3À§ùﬁÔõ”)
+T˘’úF‡«≠â[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ cat ./-file05[K6
+[?2004lQ ƒπâMª∞◊p4ó-Ô8™‡=¯é!#gèóÓ£[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ cat ./-file06[K7
+[?2004l4oQYVPkxZOOEOO5pTW81FB8j8lxXGUQw
+[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ cat ./-file07[K8
+[?2004l ßh?+>©¥ÒÉR0\üÖqÉc˙µ(|è^âÓ±[?2004h]0;bandit4@bandit: ~/inhere[01;32mbandit4@bandit[00m:[01;34m~/inhere[00m$ exit
+[?2004llogout
+===================================
+Tue Sep 10 17:33:03 EDT 2024
+
+      ,----..            ,----,          .---.
+     /   /   \         ,/   .`|         /. ./|
+    /   .     :      ,`   .'  :     .--'.  ' ;
+   .   /   ;.  \   ;    ;     /    /__./ \ : |
+  .   ;   /  ` ; .'___,/    ,' .--'.  '   \' .
+  ;   |  ; \ ; | |    :     | /___/ \ |    ' '
+  |   :  | ; | ' ;    |.';  ; ;   \  \;      :
+  .   |  ' ' ' : `----'  |  |  \   ;  `      |
+  '   ;  \; /  |     '   :  ;   .   \    .\  ;
+   \   \  ',  /      |   |  '    \   \   ' \ |
+    ;   :    /       '   :  |     :   '  |--"
+     \   \ .'        ;   |.'       \   \ ;
+  www. `---` ver     '---' he       '---" ire.org
+
+
+Welcome to OverTheWire!
+
+If you find any problems, please report them to the #wargames channel on
+discord or IRC.
+
+--[ Playing the games ]--
+
+  This machine might hold several wargames.
+  If you are playing "somegame", then:
+
+    * USERNAMES are somegame0, somegame1, ...
+    * Most LEVELS are stored in /somegame/.
+    * PASSWORDS for each level are stored in /etc/somegame_pass/.
+
+  Write-access to homedirectories is disabled. It is advised to create a
+  working directory with a hard-to-guess name in /tmp/.  You can use the
+  command "mktemp -d" in order to generate a random and hard to guess
+  directory in /tmp/.  Read-access to both /tmp/ is disabled and to /proc
+  restricted so that users cannot snoop on eachother. Files and directories
+  with easily guessable or short names will be periodically deleted! The /tmp
+  directory is regularly wiped.
+  Please play nice:
+
+    * don't leave orphan processes running
+    * don't leave exploit-files laying around
+    * don't annoy other players
+    * don't post passwords or spoilers
+    * again, DONT POST SPOILERS!
+      This includes writeups of your solution on your blog or website!
+
+--[ Tips ]--
+
+  This machine has a 64bit processor and many security-features enabled
+  by default, although ASLR has been switched off.  The following
+  compiler flags might be interesting:
+
+    -m32                    compile for 32bit
+    -fno-stack-protector    disable ProPolice
+    -Wl,-z,norelro          disable relro
+
+  In addition, the execstack tool can be used to flag the stack as
+  executable on ELF binaries.
+
+  Finally, network-access is limited for most levels by a local
+  firewall.
+
+--[ Tools ]--
+
+ For your convenience we have installed a few useful tools which you can find
+ in the following locations:
+
+    * gef (https://github.com/hugsy/gef) in /opt/gef/
+    * pwndbg (https://github.com/pwndbg/pwndbg) in /opt/pwndbg/
+    * peda (https://github.com/longld/peda.git) in /opt/peda/
+    * gdbinit (https://github.com/gdbinit/Gdbinit) in /opt/gdbinit/
+    * pwntools (https://github.com/Gallopsled/pwntools)
+    * radare2 (http://www.radare.org/)
+
+--[ More information ]--
+
+  For more information regarding individual wargames, visit
+  http://www.overthewire.org/wargames/
+
+  For support, questions or comments, contact us on discord or IRC.
+
+  Enjoy your stay!
+
+[?2004h]0;bandit5@bandit: ~[01;32mbandit5@bandit[00m:[01;34m~[00m$ ls
+[?2004l[0m[01;34minhere[0m
+[?2004h]0;bandit5@bandit: ~[01;32mbandit5@bandit[00m:[01;34m~[00m$ exit
+[?2004llogout
